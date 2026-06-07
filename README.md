@@ -62,11 +62,8 @@ src/main/java/com/sliit/transpocore/TranspoCore.java
 - `Database.txt` – Contains mock or setup data for initial testing.
 
 .
-
-## 📬 Contact
-
-For inquiries or collaboration, reach out to:  
-📧 sahandesilva484@gmail.com  
-📱 +94 776 822240
+Team : H M K Nimsara
+       W S DE Silva
+       N R Silva
 
 
