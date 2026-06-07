@@ -1,0 +1,71 @@
+-----Shipment------- 
+Database Name project
+
+CREATE TABLE shipments (
+    shipmentId INT AUTO_INCREMENT PRIMARY KEY,
+    senderName VARCHAR(100) NOT NULL,
+    receiverName VARCHAR(100) NOT NULL,
+    packageContents VARCHAR(255) NOT NULL,
+    deliveryStatus VARCHAR(50) NOT NULL,
+    senderEmail VARCHAR(255) NOT NULL,
+    shipmentDate DATE NOT NULL,
+    weight DOUBLE NOT NULL,
+    deliveryAddress VARCHAR(255) NOT NULL
+);
+
+
+CREATE TABLE drivers (
+    driverId INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20),
+    assignedRoute VARCHAR(100),
+    schedule VARCHAR(100),
+    deliveryHistory TEXT
+);
+
+
+CREATE TABLE driver_assignment (
+    assignment_id INT AUTO_INCREMENT PRIMARY KEY,
+    shipment_id INT NOT NULL,
+    driver_id INT NOT NULL,
+    assignment_date TIMESTAMP,
+    status VARCHAR(50),
+    CONSTRAINT fk_shipment
+      FOREIGN KEY (shipment_id)
+      REFERENCES shipments(shipmentId)
+      ON DELETE CASCADE,
+    CONSTRAINT fk_driver
+      FOREIGN KEY (driver_id)
+      REFERENCES drivers(driverId)
+      ON DELETE CASCADE
+);
+
+
+
+CREATE TABLE delivery_schedule (
+    scheduleId INT AUTO_INCREMENT PRIMARY KEY,
+    shipmentId INT NOT NULL,
+    scheduledDeliveryTime TIMESTAMP NOT NULL,
+    CONSTRAINT fk_schedule_shipment
+      FOREIGN KEY (shipmentId)
+      REFERENCES shipments(shipmentId)
+      ON DELETE CASCADE
+);
+
+
+
+
+CREATE TABLE shipment_progress (
+    progressId INT AUTO_INCREMENT PRIMARY KEY,
+    shipmentId INT NOT NULL,
+    currentLocation VARCHAR(255),
+    status VARCHAR(100),
+    estimatedArrival TIMESTAMP,
+    delayReason VARCHAR(255),
+    CONSTRAINT fk_shipment_progress_shipment
+      FOREIGN KEY (shipmentId)
+      REFERENCES shipments(shipmentId)
+      ON DELETE CASCADE
+);
+
